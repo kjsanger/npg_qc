@@ -49,8 +49,6 @@ jobs:
           key: ${{ runner.os }}-build-miniconda
 
       - name: "Install Conda packages"
-        env:
-          CONDA_TEST_ENV: test-environment
         run: |
           conda config --prepend pkgs_dirs ~/conda/pkgs
           conda config --prepend envs_dirs ~/conda/envs
@@ -60,7 +58,7 @@ jobs:
           conda config --append channels conda-forge
           conda info
 
-          conda create -y -n "$CONDA_TEST_ENV"
+          conda create  -y -n "$CONDA_TEST_ENV"
           conda install -y -n "$CONDA_TEST_ENV" nodejs=="${{ matrix.node }}"
           conda install -y -n "$CONDA_TEST_ENV" npg_qc_utils
           conda install -y -n "$CONDA_TEST_ENV" baton
